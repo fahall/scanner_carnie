@@ -1,0 +1,33 @@
+E1113 22:47:02.649952 15054 op_registry.cpp:25] Attempted to re-register op GenderDetect
+F1113 22:47:05.318763 15081 python_kernel.cpp:55] Traceback (most recent call last):
+
+  File "<string>", line 7, in <module>
+
+TypeError: this constructor takes no arguments
+*** Check failure stack trace: ***
+    @     0x7fd10f44343d  google::LogMessage::Fail()
+    @     0x7fd10f445253  google::LogMessage::SendToLog()
+    @     0x7fd10f442fcb  google::LogMessage::Flush()
+    @     0x7fd10f445c3e  google::LogMessageFatal::~LogMessageFatal()
+    @     0x7fd0ba358e97  scanner::PythonKernel::PythonKernel()
+    @     0x7fd0ba2d2439  _ZNSt17_Function_handlerIFPN7scanner10BaseKernelERKNS0_12KernelConfigEEZNS0_8internal10MasterImpl20RegisterPythonKernelEPN4grpc13ServerContextEPKNS0_5proto24PythonKernelRegistrationEPNSC_6ResultEEUlS5_E_E9_M_invokeERKSt9_Any_dataS5_
+    @     0x7fd0ba31e492  scanner::internal::EvaluateWorker::EvaluateWorker()
+    @     0x7fd0ba2ea125  _ZN7scanner8internal12_GLOBAL__N_115evaluate_driverERNS_5QueueISt5tupleIJSt5dequeINS0_10TaskStreamESaIS5_EENS0_13EvalWorkEntryEEEEESB_NS0_18EvaluateWorkerArgsE
+    @     0x7fd0ba30a097  _ZNSt12_Bind_simpleIFPFvRN7scanner5QueueISt5tupleIJSt5dequeINS0_8internal10TaskStreamESaIS5_EENS4_13EvalWorkEntryEEEEESB_NS4_18EvaluateWorkerArgsEESt17reference_wrapperISA_ESG_SC_EE9_M_invokeIJLm0ELm1ELm2EEEEvSt12_Index_tupleIJXspT_EEE
+    @     0x7fd0ba30a0ef  std::thread::_Impl<>::_M_run()
+    @     0x7fd10ecb0c80  (unknown)
+    @     0x7fd1644d16ba  start_thread
+    @     0x7fd1642073dd  clone
+Process Process-1:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/usr/lib/python2.7/multiprocessing/process.py", line 114, in run
+    self._target(*self._args, **self._kwargs)
+  File "/h/alexhall/scanner/python/scannerpy/database.py", line 356, in heartbeat_task
+    master.PokeWatchdog(rpc_types.Empty())
+  File "/h/wcrichto/.env/local/lib/python2.7/site-packages/grpc/_channel.py", line 511, in __call__
+    return _end_unary_response_blocking(state, False, deadline)
+  File "/h/wcrichto/.env/local/lib/python2.7/site-packages/grpc/_channel.py", line 459, in _end_unary_response_blocking
+    raise _Rendezvous(state, None, None, deadline)
+_Rendezvous: <_Rendezvous of RPC that terminated with (StatusCode.UNAVAILABLE, {"created":"@1510631225.627712974","description":"Endpoint read failed","file":"src/core/ext/transport/chttp2/transport/chttp2_transport.c","file_line":1851,"grpc_status":14,"occurred_during_write":0,"referenced_errors":[{"created":"@1510631225.627703271","description":"Socket closed","fd":42,"file":"src/core/lib/iomgr/tcp_posix.c","file_line":249,"target_address":"ipv4:172.19.145.186:5003"}]})>
